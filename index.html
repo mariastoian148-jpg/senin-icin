@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For You ❤️</title>
+<style>
+:root{--bg:#ffe6f0;--card:#ffccd9;--accent:#ff6b81;--text:#02101a;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.wrap{max-width:900px;width:100%;background:var(--card);border-radius:16px;padding:20px;box-shadow:0 8px 30px rgba(0,0,0,0.2);}
+header{display:flex;gap:16px;align-items:center;}
+.avatar{width:84px;height:84px;border-radius:12px;overflow:hidden;flex:0 0 84px;border:2px solid rgba(0,0,0,0.1);}
+.avatar img{width:100%;height:100%;object-fit:cover;}
+h1{margin:0;font-size:20px;}
+p.lead{margin:6px 0 0;opacity:0.9;}
+.grid{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px;}
+@media(max-width:880px){ .grid{grid-template-columns:1fr} .right{order:2} }
+.left{background:var(--card);padding:14px;border-radius:12px;}
+.slideshow{height:260px;border-radius:10px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;position:relative}
+.slideshow img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
+.slideshowMessage{
+  margin-top:16px;
+  background: rgba(255,255,255,0.3);
+  border-radius:12px;
+  padding:14px 18px;
+  text-align:center;
+  font-size:14px;
+  line-height:1.6;
+  color: var(--text);
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+.slideshowMessage strong{color:var(--accent);}
+.slideshowMessage em{font-style:italic;color:#ff4d6d;}
+.right{background:var(--card);padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:12px;align-items:stretch;}
+button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;padding:10px 14px;border-radius:10px;color:#02101a;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(255,107,129,0.12);}
+.messages{
+  position: relative;
+  background: rgba(255,255,255,0.05);
+  padding:10px;
+  border-radius:10px;
+  min-height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding-left:18px;
+  padding-right:18px;
+  white-space:pre-wrap;
+  overflow: hidden;
+}
+.small{font-size:13px;opacity:0.9;}
+.timeTogether{margin-top:10px;font-size:14px;text-align:center;opacity:0.8;}
+
+/* FLYING HEARTS */
+.flying-heart {
+  position: fixed;
+  font-size: 24px;
+  color: red;
+  top: -50px;
+  z-index: 9999;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity:1; }
+  50% { transform: translateY(50vh) translateX(20px) rotate(180deg); }
+  100% { transform: translateY(110vh) translateX(-10px) rotate(360deg); opacity:0; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="avatar">
+      <img src="https://i.imgur.com/jNM1FE2.jpeg" alt="avatar">
+    </div>
+    <div>
+      <h1>Bu site sana özel ❤️</h1>
+      <p class="lead">Uzakta olsak da yanında olduğumu hissetmeni istedim.</p>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="left">
+      <div class="slideshow">
+        <img id="slideshow" alt="slideshow">
+      </div>
+
+      <div class="slideshowMessage" id="slideshowMessage">
+        <p>
+          Aşkım, üzülme sakın. Unutacağız bunu bitanem.<br><br>
+          Ama her şey eskisi gibi olmayacak. <strong>DAHA İYİ OLACAK AŞKIM.</strong><br>
+          Çünkü artık her şey açık, artık hep dürüst olacağız. Daha mutlu olacağız. Ben sana eskisinden daha fazla güveneceğim.<br><br>
+          Seni üzmek istemedim, ne dün ne bugün. Ama beni de anla aşkım biraz zamana ihtiyacım var.<br>
+          Söz çok iyi olacağız. <strong>İYİYİZ ZATEN BİTANEM.</strong><br>
+          Ben seni mutlu etmek istiyorum bitanem. Mutlu edeceğim.<br><br>
+          <em>Gül aşkım çünkü gülüşüne aşığım ben. ❤️</em>
+        </p>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="messages" id="messageBox">
+        <div><strong class="small">Merhaba aşkım ! Önce derin bir nefes al bitanem. 😚</strong></div>
+      </div>
+
+      <button class="btn" id="lyricsBtn">Şarkı sözleri</button>
+      <button class="btn" id="stopMusicBtn" style="background:linear-gradient(90deg,#999,#ccc);color:#02101a;">Müziği Durdur</button>
+
+      <div class="timeTogether" id="timeTogether"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Audio -->
+<audio id="bgMusic" loop>
+  <source src="Addicted.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  // ===== IMAGES =====
+  const images = [
+    "https://i.imgur.com/pVQ3DQh.jpg",
+    "https://i.imgur.com/Vrs1Z1N.jpg",
+    "https://i.imgur.com/lM2dDXf.jpg",
+    "https://i.imgur.com/xLdE0si.jpg"
+  ];
+  let current = 0;
+  const imgTag = document.getElementById("slideshow");
+  images.forEach(url => { const img = new Image(); img.src = url; });
+  function showNext(){ 
+    imgTag.src = images[current]; 
+    current = (current+1)%images.length; 
+  }
+  setInterval(showNext, 3000);
+  showNext();
+
+  // ===== LYRICS ALL AT ONCE =====
+  const lyrics = `İnanamıyorum, nasıl olmuş da
+Tüm hayatım geçmiş
+Adını hiç dudaklarıma almadan,
+Kalbimi ortaya koymadan.
+Şimdi içindeyken, her geceyi
+Başka hiçbir tutku olmadan geçirebilirim, ölünceye dek.
+Sanırım bağımlısıyım, ellerinin kalçalarımdaki hâline.
+Sanırım ilk kez biliyorum neye ihtiyacım olduğunu.
+Ve seni öyle çok istiyorum ki — öyle çok ki korkuyorum artık,
+Çünkü eğer gidersen, ne kadar güzel olduğunu bileceğim.
+Kimse senin yaptığın gibi yapamaz,
+Beni her yönümle tanıyan.
+Kimse senin yaptığın gibi yapamaz,
+Beni sevme biçimin gibi.`;
+
+  const lyricsBtn = document.getElementById('lyricsBtn');
+  const messageBox = document.getElementById('messageBox');
+  const stopMusicBtn = document.getElementById('stopMusicBtn');
+  const bgMusic = document.getElementById('bgMusic');
+
+  lyricsBtn.addEventListener('click', ()=>{
+    bgMusic.play();
+    messageBox.innerHTML = `<div><strong class="small">${lyrics.replace(/\n/g,'<br>')}</strong></div>`;
+    createFlyingHearts();
+  });
+
+  stopMusicBtn.addEventListener('click', ()=>{
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+  });
+
+  // ===== TIME TOGETHER =====
+  const timeTogetherEl = document.getElementById('timeTogether');
+  const startDate = new Date("2025-03-20T00:00:00");
+  function updateTimeTogether(){
+    const now = new Date();
+    let diff = now - startDate;
+    const totalDays = Math.floor(diff/1000/60/60/24);
+    const months = Math.floor(totalDays / 30);
+    const weeks = Math.floor((totalDays % 30) / 7);
+    const days = (totalDays % 30) % 7;
+    const hours = Math.floor((diff/1000/60/60)%24);
+    const minutes = Math.floor((diff/1000/60)%60);
+    const seconds = Math.floor((diff/1000)%60);
+    timeTogetherEl.textContent = `Seninle sevgili olduğumuz süre: ${months} ay, ${weeks} hafta, ${days} gün (${totalDays}g ${hours}s ${minutes}dk ${seconds}sn)`;
+  }
+  setInterval(updateTimeTogether,1000);
+  updateTimeTogether();
+
+  // ===== FLYING HEARTS =====
+  function createFlyingHearts(count=50){
+    for(let i=0;i<count;i++){
+      const heart = document.createElement('span');
+      heart.className = 'flying-heart';
+      heart.textContent = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random()*3) + 's';
+      heart.style.fontSize = (18 + Math.random()*12)+'px';
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),6000);
+    }
+  }
+</script>
+</body>
+</html>
