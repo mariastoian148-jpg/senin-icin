@@ -138,21 +138,25 @@ button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;pad
   showNext();
 
   // ===== LYRICS ALL AT ONCE =====
-  const lyrics = `İnanamıyorum, nasıl olmuş da
+const lyrics = `
+İnanamıyorum, nasıl olmuş da
 Tüm hayatım geçmiş
 Adını hiç dudaklarıma almadan,
 Kalbimi ortaya koymadan.
+
 Şimdi içindeyken, her geceyi
 Başka hiçbir tutku olmadan geçirebilirim, ölünceye dek.
+
 Sanırım bağımlısıyım, ellerinin kalçalarımdaki hâline.
-Sanırım ilk kez biliyorum neye ihtiyacım olduğunu.
-Ve seni öyle çok istiyorum ki — öyle çok ki korkuyorum artık,
-Çünkü eğer gidersen, ne kadar güzel olduğunu bileceğim.
+<strong>Sanırım ilk kez biliyorum neye ihtiyacım olduğunu.</strong><br>
+<strong>Ve seni öyle çok istiyorum ki — öyle çok ki korkuyorum artık,</strong><br>
+<strong>Çünkü eğer gidersen, ne kadar güzel olduğunu bileceğim.</strong>
+
 Kimse senin yaptığın gibi yapamaz,
 Beni her yönümle tanıyan.
 Kimse senin yaptığın gibi yapamaz,
-Beni sevme biçimin gibi.`;
-
+Beni sevme biçimin gibi.
+`;
   const lyricsBtn = document.getElementById('lyricsBtn');
   const messageBox = document.getElementById('messageBox');
   const stopMusicBtn = document.getElementById('stopMusicBtn');
