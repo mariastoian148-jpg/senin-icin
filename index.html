@@ -21,122 +21,157 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:flex-start;
   padding:20px;
+  position:relative;
+  overflow-x:hidden;
 }
+
+/* WRAP */
 .wrap{
   max-width:900px;
   width:100%;
+  border-radius:16px;
 }
+
+/* SLIDESHOW */
 .slideshow{
-  height:300px;
+  width:100%;
+  height:260px;
   border-radius:10px;
   overflow:hidden;
   background:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  position:relative;
+  margin-bottom:16px;
 }
 .slideshow img{
   width:100%;
   height:100%;
   object-fit:cover;
-  border-radius:10px;
 }
+
+/* TIME TOGETHER */
 .timeTogether{
-  margin:12px 0;
-  font-size:16px;
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+/* REBUS TABLE */
+#rebusTable{
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+#rebusTable td{
+  width:35px;
+  height:35px;
+  border:1px solid #ff6b81;
   text-align:center;
-  opacity:0.85;
-}
-.rebusContainer{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  margin-top:20px;
-}
-.rebusGrid{
-  display:grid;
-  grid-template-columns: repeat(13, 40px);
-  grid-template-rows: repeat(10, 40px);
-  gap:2px;
-}
-.rebusGrid input{
-  width:38px;
-  height:38px;
-  text-align:center;
-  font-weight:bold;
+  vertical-align:middle;
   font-size:18px;
   text-transform:uppercase;
-  border:1px solid #aaa;
-  background:#fff;
-  color:#02101a;
 }
-.rebusDefs{
-  margin-top:16px;
+#rebusTable input{
+  width:100%;
+  height:100%;
+  text-align:center;
+  border:none;
+  outline:none;
+  font-size:18px;
+  text-transform:uppercase;
+  background:transparent;
+}
+
+/* DEFINITIONS */
+.definitions{
   text-align:left;
-  max-width:600px;
-  line-height:1.5;
+  margin-top:10px;
+  font-size:14px;
 }
-.rebusDefs strong{color:var(--accent);}
-.flying-heart {
-  position: fixed;
-  font-size: 24px;
-  color: red;
-  top: -50px;
-  z-index: 9999;
-  pointer-events: none;
-  animation: fall linear forwards;
+
+/* BUTTONS */
+button.btn{
+  background:linear-gradient(90deg,var(--accent), #ff9aa2);
+  border:0;
+  padding:10px 14px;
+  border-radius:10px;
+  color:#02101a;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(255,107,129,0.12);
+  margin:5px;
 }
-@keyframes fall {
-  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity:1; }
-  50% { transform: translateY(50vh) translateX(20px) rotate(180deg); }
-  100% { transform: translateY(110vh) translateX(-10px) rotate(360deg); opacity:0; }
+
+/* FLYING HEARTS */
+.flying-heart{
+  position:fixed;
+  font-size:24px;
+  color:red;
+  top:-50px;
+  z-index:9999;
+  pointer-events:none;
+  animation:fall linear forwards;
 }
-.messageUnlocked{
+@keyframes fall{
+  0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:1;}
+  50%{transform:translateY(50vh) translateX(20px) rotate(180deg);}
+  100%{transform:translateY(110vh) translateX(-10px) rotate(360deg); opacity:0;}
+}
+
+/* MESSAGE AFTER COMPLETION */
+#finalMessage{
   margin-top:20px;
   text-align:center;
   font-size:16px;
-  background: rgba(255,255,255,0.5);
-  padding:12px 18px;
-  border-radius:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  font-weight:bold;
   display:none;
+  color:#ff1a75;
 }
 </style>
 </head>
 <body>
 
 <div class="wrap">
+
+  <!-- SLIDESHOW -->
   <div class="slideshow">
-    <img id="slideshow" alt="slideshow">
+    <img id="slideshow" src="" alt="slideshow">
   </div>
 
+  <!-- TIME TOGETHER -->
   <div class="timeTogether" id="timeTogether"></div>
 
-  <div class="rebusContainer">
-    <div class="rebusGrid" id="rebusGrid"></div>
-    <div class="rebusDefs">
-      <p><strong>1.</strong> SEVGILI OLDUĞUMUZ AY - MART</p>
-      <p><strong>2.</strong> SEN BÖYLE OLUNCA İÇİMDEKİ ÇOCUK ÇOK MUTLU OLUYOR - ANLAYIŞLI</p>
-      <p><strong>3.</strong> SÜREKLİ ETTİĞİMİZ AMA NEFRET ETTİĞİMİZ - KAVGA</p>
-      <p><strong>4.</strong> KONUŞTUĞUMUZ 9. GÜNDE SANA _____ OLDUĞUMU ANLADIM - AŞIK</p>
-      <p><strong>5.</strong> SEN BENİM____ - MUTLULUĞUMSUN</p>
-      <p><strong>6.</strong> SEN ÇOK____ - AKILLISIN</p>
-      <p><strong>7.</strong> SEN BANA BÖYLE DEDİĞİNDE ÇOCUK GİBİ MUTLU OLUYORUM - BİTO(M)</p>
-      <p><strong>8.</strong> 2 KELİME, 1 CÜMLE, 2 “S” - SENİ SEVİYORUM!</p>
-      <p><strong>9.</strong> M (optional)</p>
-      <p><strong>10.</strong> İLK BULUŞTUĞUMUZ AY - NİSAN</p>
-      <p><strong>11.</strong> İYİ Kİ _____ - SEVGİLİMSİN!</p>
-      <p><strong>12.</strong> ____ ÖZLEDİM - KOKUNU</p>
-      <p><strong>13.</strong> BEN YA DA SEN DİYE BİR ŞEY YOK. ____ VAR - BİZ</p>
-    </div>
+  <!-- REBUS TABLE -->
+  <table id="rebusTable"></table>
+
+  <!-- DEFINITIONS -->
+  <div class="definitions">
+    <p><strong>Definiții:</strong></p>
+    <ol>
+      <li>Sevgili olduğumuz ay</li>
+      <li>Sen böyle olunca içimdeki çocuk çok mutlu oluyor</li>
+      <li>Sürekli ettiğimiz ama nefret ettiğimiz</li>
+      <li>Konuştuğumuz 9. günde sana _____ olduğumu anladım</li>
+      <li>Sen benim____</li>
+      <li>Sen çok____</li>
+      <li>Sen bana böyle dediğinde çocuk gibi mutlu oluyorum</li>
+      <li>2 kelime, 1 cümle, 2 “s”</li>
+      <li>İyi ki _____</li>
+      <li>İlk buluştuğumuz ay</li>
+      <li>Senin bana söylediğin gibi ____</li>
+      <li>İlişkimiz daha zor çünkü biz ____</li>
+      <li>Ben ya da sen diye bir şey yok. ____ var.</li>
+    </ol>
   </div>
 
-  <div class="messageUnlocked" id="messageUnlocked">
-    ❤️ REBUS COMPLET! ❤️<br>TE AM DESCHIS MESAJUL SPECIAL! 💌
+  <!-- SUBMIT BUTTON -->
+  <button class="btn" id="checkBtn">Verifică rebus</button>
+
+  <!-- FINAL MESSAGE -->
+  <div id="finalMessage">
+    AŞKIM, TE-AM BLOCAT INIMI ❤️❤️❤️❤️❤️
   </div>
+
 </div>
 
 <script>
@@ -147,14 +182,11 @@ body{
     "https://i.imgur.com/lM2dDXf.jpg",
     "https://i.imgur.com/xLdE0si.jpg"
   ];
-  let current = 0;
-  const imgTag = document.getElementById("slideshow");
-  images.forEach(url => { const img = new Image(); img.src = url; });
-  function showNext(){ 
-    imgTag.src = images[current]; 
-    current = (current+1)%images.length; 
-  }
-  setInterval(showNext, 3000);
+  let current=0;
+  const imgTag=document.getElementById("slideshow");
+  images.forEach(url=>{const img=new Image(); img.src=url;});
+  function showNext(){ imgTag.src=images[current]; current=(current+1)%images.length; }
+  setInterval(showNext,3000);
   showNext();
 
   // ===== TIME TOGETHER =====
@@ -167,96 +199,71 @@ body{
     const months = Math.floor(totalDays / 30);
     const weeks = Math.floor((totalDays % 30) / 7);
     const days = (totalDays % 30) % 7;
-    const hours = Math.floor((diff/1000/60/60)%24);
-    const minutes = Math.floor((diff/1000/60)%60);
-    const seconds = Math.floor((diff/1000)%60);
-    timeTogetherEl.textContent = `Seninle sevgili olduğumuz süre: ${months} ay, ${weeks} hafta, ${days} zile (${totalDays}g ${hours}h ${minutes}m ${seconds}s)`;
+    timeTogetherEl.textContent = `Seninle sevgili olduğumuz süre: ${months} ay, ${weeks} hafta, ${days} zile (${totalDays}g)`;
   }
   setInterval(updateTimeTogether,1000);
   updateTimeTogether();
 
-  // ===== REBUS GRID =====
-  const rebusGrid = document.getElementById("rebusGrid");
-  const rows = 10, cols = 13;
-  let gridData = Array(rows).fill(null).map(()=>Array(cols).fill(''));
+  // ===== REBUS =====
+  const table = document.getElementById('rebusTable');
 
-  // Define letters for vertical main word AŞKIMIZSONSUZ
-  const vertical = "AŞKIMIZSONSUZ";
-  const verticalCol = 6; // zero-based index
-  for(let i=0;i<vertical.length;i++){
-    gridData[i][verticalCol] = vertical[i];
+  // GRID: 13 răspunsuri, maxim 13 litere pe verticala "ASKIMIZSONSUZ"
+  const rows = 13;
+  const cols = 13;
+
+  // Cuvantul vertical principal: AŞKIMIZSONSUZ
+  const verticalWord = "ASKIMIZSONSUZ";
+
+  // Creare tabel cu input-uri
+  for(let r=0;r<rows;r++){
+    const tr=document.createElement('tr');
+    for(let c=0;c<cols;c++){
+      const td=document.createElement('td');
+      const input=document.createElement('input');
+      td.appendChild(input);
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
   }
 
-  // Define horizontal words (simplified placement)
-  const horizontals = [
-    {row:0,col:0,word:"MART"},
-    {row:1,col:0,word:"ANLAYIŞLI"},
-    {row:2,col:0,word:"KAVGA"},
-    {row:3,col:0,word:"AŞIK"},
-    {row:4,col:0,word:"MUTLULUĞUMSUN"},
-    {row:5,col:0,word:"AKILLISIN"},
-    {row:6,col:0,word:"BITO"},
-    {row:7,col:0,word:"SENİSEVİYORUM"},
-    {row:9,col:0,word:"NİSAN"},
-    {row:11,col:0,word:"KOKUNU"},
-    {row:12,col:0,word:"BİZ"},
+  // RASPUNSURI
+  const answers = [
+    "MART","ANLAYISLI","KAVGA","ASIK","MUTLULUĞUMSUN","AKILLISIN","BITOM","SENİ SEVİYORUM","SEVGİLİMSİN","NISAN","BIZE","UZAKTAYIZ","BIZ"
   ];
 
-  horizontals.forEach(h=>{
-    for(let i=0;i<h.word.length;i++){
-      if(h.col+i<cols && h.row<rows){
-        gridData[h.row][h.col+i] = h.word[i];
+  // CHECK BUTTON
+  document.getElementById('checkBtn').addEventListener('click',()=>{
+    let correct=true;
+    for(let r=0;r<rows;r++){
+      for(let c=0;c<cols;c++){
+        const input = table.rows[r].cells[c].firstChild;
+        if(input.value.toUpperCase() === verticalWord[r]){
+          input.style.background="lightgreen";
+        }else{
+          input.style.background="";
+          correct=false;
+        }
       }
+    }
+    if(correct){
+      document.getElementById('finalMessage').style.display="block";
+      createFlyingHearts(100);
     }
   });
-
-  // Render grid
-  let inputRefs = [];
-  for(let r=0;r<rows;r++){
-    for(let c=0;c<cols;c++){
-      const val = gridData[r][c];
-      const input = document.createElement("input");
-      input.maxLength = 1;
-      input.dataset.row = r;
-      input.dataset.col = c;
-      input.value = '';
-      if(val!=='') input.placeholder = '';
-      else input.disabled = true;
-      rebusGrid.appendChild(input);
-      inputRefs.push({input,val});
-      input.addEventListener("input",checkRebus);
-    }
-  }
-
-  // ===== CHECK REBUS =====
-  const messageUnlocked = document.getElementById("messageUnlocked");
-  function checkRebus(){
-    let complete = true;
-    inputRefs.forEach(obj=>{
-      if(obj.val!==''){
-        if(obj.input.value.toUpperCase()!==obj.val.toUpperCase()) complete=false;
-      }
-    });
-    if(complete){
-      messageUnlocked.style.display="block";
-      createFlyingHearts();
-    }
-  }
 
   // ===== FLYING HEARTS =====
   function createFlyingHearts(count=50){
     for(let i=0;i<count;i++){
-      const heart = document.createElement('span');
-      heart.className = 'flying-heart';
-      heart.textContent = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (3 + Math.random()*3) + 's';
-      heart.style.fontSize = (18 + Math.random()*12)+'px';
+      const heart=document.createElement('span');
+      heart.className='flying-heart';
+      heart.textContent='❤️';
+      heart.style.left=Math.random()*100+'vw';
+      heart.style.animationDuration=(3+Math.random()*3)+'s';
+      heart.style.fontSize=(18+Math.random()*12)+'px';
       document.body.appendChild(heart);
       setTimeout(()=>heart.remove(),6000);
     }
   }
 </script>
-
 </body>
 </html>
