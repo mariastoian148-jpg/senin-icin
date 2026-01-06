@@ -14,43 +14,19 @@ header{display:flex;gap:16px;align-items:center;}
 .avatar img{width:100%;height:100%;object-fit:cover;}
 h1{margin:0;font-size:20px;}
 p.lead{margin:6px 0 0;opacity:0.9;}
-.grid{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px;}
-@media(max-width:880px){ .grid{grid-template-columns:1fr} .right{order:2} }
+.grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px;}
 .left{background:var(--card);padding:14px;border-radius:12px;}
 .slideshow{height:260px;border-radius:10px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;position:relative}
 .slideshow img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
-.slideshowMessage{
-  margin-top:16px;
-  background: rgba(255,255,255,0.3);
-  border-radius:12px;
-  padding:14px 18px;
-  text-align:center;
-  font-size:14px;
-  line-height:1.6;
-  color: var(--text);
-  box-shadow:0 4px 15px rgba(0,0,0,0.2);
-}
-.slideshowMessage strong{color:var(--accent);}
-.slideshowMessage em{font-style:italic;color:#ff4d6d;}
 .right{background:var(--card);padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:12px;align-items:stretch;}
-button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;padding:10px 14px;border-radius:10px;color:#02101a;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(255,107,129,0.12);}
-.messages{
-  position: relative;
-  background: rgba(255,255,255,0.05);
-  padding:10px;
-  border-radius:10px;
-  min-height:120px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding-left:18px;
-  padding-right:18px;
-  white-space:pre-wrap;
-  overflow: hidden;
-}
-.small{font-size:13px;opacity:0.9;}
 .timeTogether{margin-top:10px;font-size:14px;text-align:center;opacity:0.8;}
+
+/* REBUS */
+.rebus-container{margin-top:20px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.rebus-grid{display:grid;grid-template-columns:repeat(13,40px);grid-template-rows:repeat(12,40px);gap:2px;}
+.rebus-cell{width:40px;height:40px;border:1px solid rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-weight:bold;text-transform:uppercase;font-size:16px;text-align:center;background:#fff;}
+.rebus-cell input{width:100%;height:100%;border:none;text-align:center;font-weight:bold;font-size:16px;text-transform:uppercase;background:transparent;}
+.rebus-cell input:focus{outline:2px solid var(--accent);}
 
 /* FLYING HEARTS */
 .flying-heart {
@@ -67,6 +43,7 @@ button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;pad
   50% { transform: translateY(50vh) translateX(20px) rotate(180deg); }
   100% { transform: translateY(110vh) translateX(-10px) rotate(360deg); opacity:0; }
 }
+
 </style>
 </head>
 <body>
@@ -86,96 +63,35 @@ button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;pad
       <div class="slideshow">
         <img id="slideshow" alt="slideshow">
       </div>
-
-      <div class="slideshowMessage" id="slideshowMessage">
-        <p>
-          Aşkım, üzülme sakın. Unutacağız bunu bitanem.<br><br>
-          Ama her şey eskisi gibi olmayacak. <strong>DAHA İYİ OLACAK AŞKIM.</strong><br>
-          Çünkü artık her şey açık, artık hep dürüst olacağız. Daha mutlu olacağız. Ben sana eskisinden daha fazla güveneceğim.<br><br>
-          Seni üzmek istemedim, ne dün ne bugün. Ama beni de anla aşkım biraz zamana ihtiyacım var.<br>
-          Söz çok iyi olacağız. <strong>İYİYİZ ZATEN BİTANEM.</strong><br>
-          Ben seni mutlu etmek istiyorum bitanem. Mutlu edeceğim.<br><br>
-          <em>Gül aşkım çünkü gülüşüne aşığım ben. ❤️</em>
-        </p>
-      </div>
     </div>
-
     <div class="right">
-      <div class="messages" id="messageBox">
-        <div><strong class="small">Merhaba aşkım ! Önce derin bir nefes al bitanem. 😚</strong></div>
-      </div>
-
-      <button class="btn" id="lyricsBtn">Şarkı sözleri</button>
-      <button class="btn" id="stopMusicBtn" style="background:linear-gradient(90deg,#999,#ccc);color:#02101a;">Müziği Durdur</button>
-
       <div class="timeTogether" id="timeTogether"></div>
     </div>
   </div>
+
+  <!-- REBUS -->
+  <div class="rebus-container">
+    <p><strong>ŞARKI SÖZLERİ İÇİN: TAMAMLA REBUSU</strong></p>
+    <div class="rebus-grid" id="rebusGrid"></div>
+  </div>
 </div>
 
-<!-- Audio -->
-<audio id="bgMusic" loop>
-  <source src="Addicted.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
 <script>
-  // ===== IMAGES =====
+  // ===== SLIDESHOW =====
   const images = [
     "https://i.imgur.com/pVQ3DQh.jpg",
     "https://i.imgur.com/Vrs1Z1N.jpg",
     "https://i.imgur.com/lM2dDXf.jpg",
-    "https://i.imgur.com/xLdE0si.jpg",
-    "https://i.imgur.com/G5goW1V.jpeg",
-    "https://i.imgur.com/ip5CFtS.jpeg",
-    "https://i.imgur.com/rlP027N.jpeg",
-    "https://i.imgur.com/yDFstzE.jpeg"
+    "https://i.imgur.com/xLdE0si.jpg"
   ];
   let current = 0;
   const imgTag = document.getElementById("slideshow");
-  images.forEach(url => { const img = new Image(); img.src = url; });
   function showNext(){ 
     imgTag.src = images[current]; 
     current = (current+1)%images.length; 
   }
   setInterval(showNext, 3000);
   showNext();
-
-  // ===== LYRICS ALL AT ONCE =====
-const lyrics = `
-İnanamıyorum, nasıl olmuş da
-Tüm hayatım geçmiş
-Adını hiç dudaklarıma almadan,
-Kalbimi ortaya koymadan.
-Şimdi içindeyken, her geceyi
-Başka hiçbir tutku olmadan geçirebilirim, ölünceye dek.
-
-Sanırım bağımlısıyım, ellerinin kalçalarımdaki hâline.
-<strong>Sanırım ilk kez biliyorum neye ihtiyacım olduğunu.</strong>
-<strong>Ve seni öyle çok istiyorum ki — öyle çok ki korkuyorum artık,</strong>
-<strong>Çünkü eğer gidersen, ne kadar güzel olduğunu bileceğim.</strong>
-
-Kimse senin yaptığın gibi yapamaz,
-Beni her yönümle tanıyan.
-Kimse senin yaptığın gibi yapamaz,
-Beni sevme biçimin gibi.
-`;
-  
-  const lyricsBtn = document.getElementById('lyricsBtn');
-  const messageBox = document.getElementById('messageBox');
-  const stopMusicBtn = document.getElementById('stopMusicBtn');
-  const bgMusic = document.getElementById('bgMusic');
-
-  lyricsBtn.addEventListener('click', ()=>{
-    bgMusic.play();
-    messageBox.innerHTML = `<div><strong class="small">${lyrics.replace(/\n/g,'<br>')}</strong></div>`;
-    createFlyingHearts();
-  });
-
-  stopMusicBtn.addEventListener('click', ()=>{
-    bgMusic.pause();
-    bgMusic.currentTime = 0;
-  });
 
   // ===== TIME TOGETHER =====
   const timeTogetherEl = document.getElementById('timeTogether');
@@ -187,13 +103,93 @@ Beni sevme biçimin gibi.
     const months = Math.floor(totalDays / 30);
     const weeks = Math.floor((totalDays % 30) / 7);
     const days = (totalDays % 30) % 7;
-    const hours = Math.floor((diff/1000/60/60)%24);
-    const minutes = Math.floor((diff/1000/60)%60);
-    const seconds = Math.floor((diff/1000)%60);
-    timeTogetherEl.textContent = `Seninle sevgili olduğumuz süre: ${months} ay, ${weeks} hafta, ${days} gün (${totalDays}g ${hours}s ${minutes}dk ${seconds}sn)`;
+    timeTogetherEl.textContent = `Seninle sevgili olduğumuz süre: ${months} ay, ${weeks} hafta, ${days} gün (${totalDays}g)`;
   }
   setInterval(updateTimeTogether,1000);
   updateTimeTogether();
+
+  // ===== REBUS LOGIC =====
+  const rebusGrid = document.getElementById('rebusGrid');
+
+  // Vertical word: AŞKIMIZSONSUZ
+  const vertical = "AŞKIMIZSONSUZ";
+  const rebusAnswers = [
+    {word:"MART", row:0, col:0, dir:"h"},
+    {word:"ANLAYIŞLI", row:1, col:2, dir:"h"},
+    {word:"KAVGA", row:2, col:3, dir:"h"},
+    {word:"AŞIK", row:3, col:6, dir:"h"},
+    {word:"MUTLULUĞUMSUN", row:4, col:7, dir:"h"},
+    {word:"AKILLISIN", row:5, col:10, dir:"h"},
+    {word:"BİTO", row:6, col:1, dir:"h"},
+    {word:"SENİ SEVİYORUM", row:7, col:0, dir:"h"},
+    {word:"İYİKİ SEVGİLİMSİN", row:8, col:3, dir:"h"},
+    {word:"NİSAN", row:9, col:2, dir:"h"},
+    {word:"UZAKTAYIZ", row:10, col:6, dir:"h"},
+    {word:"BİZ", row:11, col:9, dir:"h"}
+  ];
+
+  // create 12x13 grid
+  const ROWS = 12, COLS = 13;
+  const cells = [];
+  for(let r=0;r<ROWS;r++){
+    cells[r]=[];
+    for(let c=0;c<COLS;c++){
+      const div = document.createElement('div');
+      div.className='rebus-cell';
+      const input = document.createElement('input');
+      input.maxLength = 1;
+      div.appendChild(input);
+      rebusGrid.appendChild(div);
+      cells[r][c]=input;
+    }
+  }
+
+  // fill vertical word
+  for(let r=0;r<vertical.length;r++){
+    const letter = vertical[r];
+    const col = 6; // center column
+    cells[r][col].dataset.correct=letter;
+  }
+
+  // fill horizontal words
+  rebusAnswers.forEach(obj=>{
+    const {word,row,col,dir}=obj;
+    for(let i=0;i<word.length;i++){
+      const r = row + (dir=="v"?i:0);
+      const c = col + (dir=="h"?i:0);
+      if(cells[r][c].dataset.correct){
+        // if already has vertical letter, keep the vertical one
+        continue;
+      } else {
+        cells[r][c].dataset.correct=word[i];
+      }
+    }
+  });
+
+  // check rebus completion
+  function checkRebus(){
+    let complete = true;
+    for(let r=0;r<ROWS;r++){
+      for(let c=0;c<COLS;c++){
+        const input = cells[r][c];
+        if(input.dataset.correct && input.value.toUpperCase()!==input.dataset.correct){
+          complete=false;
+        }
+      }
+    }
+    if(complete){
+      createFlyingHearts();
+      alert("Tocmai ai completat rebusul! ❤️");
+    }
+  }
+
+  // add input event
+  for(let r=0;r<ROWS;r++){
+    for(let c=0;c<COLS;c++){
+      const input = cells[r][c];
+      input.addEventListener('input',checkRebus);
+    }
+  }
 
   // ===== FLYING HEARTS =====
   function createFlyingHearts(count=50){
