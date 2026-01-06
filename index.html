@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -21,14 +21,13 @@ p.lead{margin:6px 0 0;opacity:0.9;}
 .slideshow img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
 .right{background:var(--card);padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:12px;align-items:stretch;}
 .timeTogether{margin-top:10px;font-size:14px;text-align:center;opacity:0.8;}
+button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;padding:10px 14px;border-radius:10px;color:#02101a;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(255,107,129,0.12);}
 
 /* REBUS */
 .rebus-container{margin-top:20px; width:100%; text-align:center;}
 .rebus-table{margin:0 auto;border-collapse:collapse;}
 .rebus-table td{padding:2px;}
 .rebus-table input{width:30px;height:30px;text-align:center;font-weight:bold;text-transform:uppercase;border:1px solid #ccc;font-size:16px;}
-.definitions{margin-top:12px;text-align:left;}
-.definitions ol{padding-left:20px;}
 
 /* FLYING HEARTS */
 .flying-heart {
@@ -48,15 +47,14 @@ p.lead{margin:6px 0 0;opacity:0.9;}
 </style>
 </head>
 <body>
-
 <div class="wrap">
   <header>
     <div class="avatar">
       <img src="https://i.imgur.com/jNM1FE2.jpeg" alt="avatar">
     </div>
     <div>
-      <h1>Bu site sana özel ❤️</h1>
-      <p class="lead">Uzakta olsak da yanında olduğumu hissetmeni istedim.</p>
+      <h1>Bulmacayı tamamla ❤️</h1>
+      <p class="lead">Completează rebusul pentru a afla mesajul special!</p>
     </div>
   </header>
 
@@ -65,137 +63,37 @@ p.lead{margin:6px 0 0;opacity:0.9;}
       <div class="slideshow">
         <img id="slideshow" alt="slideshow">
       </div>
+      
+      <div class="rebus-container">
+        <table class="rebus-table" id="rebusTable"></table>
+      </div>
     </div>
+
     <div class="right">
       <div class="timeTogether" id="timeTogether"></div>
+      <button class="btn" id="unlockBtn">Deblochează mesajul</button>
+      <div class="messages" id="messageBox" style="margin-top:10px;text-align:center;"></div>
     </div>
-  </div>
-</div>
-
-<!-- REBUS -->
-<div class="rebus-container">
-  <h2>Rebus-ul nostru ❤️</h2>
-  <p>Completează căsuțele și află mesajul special!</p>
-
-  <table class="rebus-table" id="rebusTable">
-    <tbody>
-      <!-- Verticala AŞKIMIZSONSUZ -->
-      <tr>
-        <td><input maxlength="1" data-letter="A"></td>
-        <td><input maxlength="1" data-letter="M"></td>
-        <td><input maxlength="1" data-letter="A"></td>
-        <td><input maxlength="1" data-letter="R"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="Ş"></td>
-        <td><input maxlength="1" data-letter="A"></td>
-        <td><input maxlength="1" data-letter="N"></td>
-        <td><input maxlength="1" data-letter="L"></td>
-        <td><input maxlength="1" data-letter="A"></td>
-        <td><input maxlength="1" data-letter="Y"></td>
-        <td><input maxlength="1" data-letter="I"></td>
-        <td><input maxlength="1" data-letter="Ş"></td>
-        <td><input maxlength="1" data-letter="L"></td>
-            </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="K"></td>
-        <td><input maxlength="1" data-letter="K"></td>
-        <td><input maxlength="1" data-letter="A"></td>
-        <td><input maxlength="1" data-letter="V"></td>
-        <td><input maxlength="1" data-letter="G"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="I"></td>
-        <td><input maxlength="1" data-letter="A"></td>
-        <td><input maxlength="1" data-letter="Ş"></td>
-        <td><input maxlength="1" data-letter="I"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="M"></td>
-        <td><input maxlength="1" data-letter="M"></td>
-        <td><input maxlength="1" data-letter="U"></td>
-        <td><input maxlength="1" data-letter="T"></td>
-        <td><input maxlength="1" data-letter="L"></td>
-        <td><input maxlength="1" data-letter="U"></td>
-        <td><input maxlength="1" data-letter="L"></td>
-        <td><input maxlength="1" data-letter="U"></td>
-        <td><input maxlength="1" data-letter="K"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="I"></td>
-        <td><input maxlength="1" data-letter="A"></td>
-        <td><input maxlength="1" data-letter="K"></td>
-        <td><input maxlength="1" data-letter="A"></td>
-        <td><input maxlength="1" data-letter="K"></td>
-        <td><input maxlength="1" data-letter="L"></td>
-        <td><input maxlength="1" data-letter="I"></td>
-        <td><input maxlength="1" data-letter="S"></td>
-        <td><input maxlength="1" data-letter="I"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="Z"></td>
-        <td><input maxlength="1" data-letter="B"></td>
-        <td><input maxlength="1" data-letter="I"></td>
-        <td><input maxlength="1" data-letter="T"></td>
-        <td><input maxlength="1" data-letter="O"></td>
-        <td><input maxlength="1" data-letter="M"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="S"></td>
-        <td><input maxlength="1" data-letter="S"></td>
-        <td><input maxlength="1" data-letter="E"></td>
-        <td><input maxlength="1" data-letter="V"></td>
-        <td><input maxlength="1" data-letter="I"></td>
-        <td><input maxlength="1" data-letter="Y"></td>
-        <td><input maxlength="1" data-letter="O"></td>
-        <td><input maxlength="1" data-letter="R"></td>
-        <td><input maxlength="1" data-letter="U"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="O"></td>
-        <td><input maxlength="1" data-letter="N"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="N"></td>
-        <td><input maxlength="1" data-letter="N"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="S"></td>
-        <td><input maxlength="1" data-letter="U"></td>
-      </tr>
-      <tr>
-        <td><input maxlength="1" data-letter="U"></td>
-        <td><input maxlength="1" data-letter="Z"></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="definitions">
-    <h3>Definiții:</h3>
-    <ol>
-      <li>Sevgili olduğumuz ay</li>
-      <li>Sen böyle olunca içimdeki çocuk çok mutlu oluyor</li>
-      <li>Sürekli ettiğimiz ama nefret ettiğimiz</li>
-      <li>Konuştuğumuz 9. günde sana _____ olduğumu anladım</li>
-      <li>Sen benim ____</li>
-      <li>Sen çok ____</li>
-      <li>Sen bana böyle dediğinde çocuk gibi mutlu oluyorum</li>
-      <li>2 kelime, 1 cümle, 2 “s”</li>
-      <li>İyi ki _____</li>
-      <li>İlk buluştuğumuz ay</li>
-      <li>İlişkimiz daha zor çünkü biz ____</li>
-      <li>____ özledim</li>
-    </ol>
   </div>
 </div>
 
 <script>
   // ===== SLIDESHOW =====
-  const images = ["https://i.imgur.com/pVQ3DQh.jpg","https://i.imgur.com/Vrs1Z1N.jpg","https://i.imgur.com/lM2dDXf.jpg","https://i.imgur.com/xLdE0si.jpg"];
-  let current=0; const imgTag=document.getElementById("slideshow");
-  images.forEach(url=>{const img=new Image(); img.src=url;});
-  function showNext(){imgTag.src=images[current]; current=(current+1)%images.length;}
-  setInterval(showNext,3000); showNext();
+  const images = [
+    "https://i.imgur.com/pVQ3DQh.jpg",
+    "https://i.imgur.com/Vrs1Z1N.jpg",
+    "https://i.imgur.com/lM2dDXf.jpg",
+    "https://i.imgur.com/xLdE0si.jpg"
+  ];
+  let current = 0;
+  const imgTag = document.getElementById("slideshow");
+  images.forEach(url => { const img = new Image(); img.src = url; });
+  function showNext(){ 
+    imgTag.src = images[current]; 
+    current = (current+1)%images.length; 
+  }
+  setInterval(showNext, 3000);
+  showNext();
 
   // ===== TIME TOGETHER =====
   const timeTogetherEl = document.getElementById('timeTogether');
@@ -212,31 +110,77 @@ p.lead{margin:6px 0 0;opacity:0.9;}
     const seconds = Math.floor((diff/1000)%60);
     timeTogetherEl.textContent = `Seninle sevgili olduğumuz süre: ${months} ay, ${weeks} hafta, ${days} gün (${totalDays}g ${hours}s ${minutes}dk ${seconds}sn)`;
   }
-  setInterval(updateTimeTogether,1000); updateTimeTogether();
+  setInterval(updateTimeTogether,1000);
+  updateTimeTogether();
 
   // ===== REBUS =====
-  const secretWord = "AŞKIMIZSONSUZ";
-  const inputs = document.querySelectorAll('.rebus-table input');
-  const unlockMessage = () => {
-    alert("Bravo! ❤️ Mesajul special s-a deblocat!");
-    for(let i=0;i<50;i++){
-      const heart=document.createElement('span');
-      heart.className='flying-heart';
-      heart.textContent='❤️';
-      heart.style.left=Math.random()*100+'vw';
-      heart.style.animationDuration=(3+Math.random()*3)+'s';
-      heart.style.fontSize=(18+Math.random()*12)+'px';
+  const words = [
+    {word:"MART", clue:"Sevgili olduğumuz ay", dir:"H"},
+    {word:"ANLAYIŞLI", clue:"Sen böyle olunca içimdeki çocuk çok mutlu oluyor", dir:"H"},
+    {word:"KAVGA", clue:"Sürekli ettiğimiz ama nefret ettiğimiz", dir:"H"},
+    {word:"AŞIK", clue:"Konuştuğumuz 9. günde sana _____ olduğumu anladım", dir:"H"},
+    {word:"MUTLULUĞUMSUN", clue:"Sen benim____", dir:"H"},
+    {word:"AKILLISIN", clue:"Sen çok____", dir:"H"},
+    {word:"BİTO", clue:"Sen bana böyle dediğinde çocuk gibi mutlu oluyorum", dir:"H"},
+    {word:"SENİ SEVİYORUM", clue:"2 kelime, 1 cümle, 2 “s”", dir:"H"},
+    {word:"NİSAN", clue:"İlk buluştuğumuz ay", dir:"H"},
+    {word:"UZAKTAYIZ", clue:"İlişkimiz daha zor çünkü biz ____", dir:"H"},
+    {word:"BİZ", clue:"Ben ya da sen diye bir şey yok. ____ var.", dir:"H"},
+    {word:"AŞKIMIZSONSUZ", clue:"Mesajul special", dir:"V"}
+  ];
+
+  const rows=15, cols=15;
+  const rebusTable=document.getElementById("rebusTable");
+
+  // create empty table
+  for(let r=0;r<rows;r++){
+    const tr=document.createElement("tr");
+    for(let c=0;c<cols;c++){
+      const td=document.createElement("td");
+      const input=document.createElement("input");
+      input.maxLength=1;
+      td.appendChild(input);
+      tr.appendChild(td);
+    }
+    rebusTable.appendChild(tr);
+  }
+
+  // place vertical word in middle column
+  const midCol=Math.floor(cols/2);
+  const verticalWord = words.find(w=>w.dir==="V").word;
+  const startRow = Math.floor((rows - verticalWord.length)/2);
+  for(let i=0;i<verticalWord.length;i++){
+    rebusTable.rows[startRow+i].cells[midCol].dataset.letter=verticalWord[i];
+  }
+
+  // place horizontal words randomly (simplified: first row empty, just as demo)
+  let hWords = words.filter(w=>w.dir==="H");
+  hWords.forEach(w=>{
+    let row = Math.floor(Math.random()*rows);
+    let col = Math.floor(Math.random()*(cols - w.word.length));
+    for(let i=0;i<w.word.length;i++){
+      rebusTable.rows[row].cells[col+i].dataset.letter=w.word[i];
+    }
+  });
+
+  // unlock message
+  const unlockBtn=document.getElementById('unlockBtn');
+  const messageBox=document.getElementById('messageBox');
+  function createFlyingHearts(count=50){
+    for(let i=0;i<count;i++){
+      const heart = document.createElement('span');
+      heart.className = 'flying-heart';
+      heart.textContent = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random()*3) + 's';
+      heart.style.fontSize = (18 + Math.random()*12)+'px';
       document.body.appendChild(heart);
       setTimeout(()=>heart.remove(),6000);
     }
   }
-  inputs.forEach(input=>{
-    input.addEventListener('input', ()=>{
-      let verticalValue='';
-      const verticalInputs=Array.from(inputs).slice(0, secretWord.length);
-      verticalInputs.forEach(i=> verticalValue+=i.value.toUpperCase());
-      if(verticalValue===secretWord){unlockMessage();}
-    });
+  unlockBtn.addEventListener('click',()=>{
+    messageBox.innerHTML="Mesajul special: AŞKIMIZSONSUZ ❤️";
+    createFlyingHearts();
   });
 </script>
 
