@@ -7,24 +7,18 @@
 <style>
 :root{--bg:#ffe6f0;--card:#ffccd9;--accent:#ff6b81;--text:#02101a;}
 *{box-sizing:border-box;}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px;}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:var(--bg);color:var(--text);display:flex;flex-direction:column;align-items:center;padding:20px;}
 .wrap{max-width:900px;width:100%;background:var(--card);border-radius:16px;padding:20px;box-shadow:0 8px 30px rgba(0,0,0,0.2); margin-bottom:30px;}
 header{display:flex;gap:16px;align-items:center;}
 .avatar{width:84px;height:84px;border-radius:12px;overflow:hidden;flex:0 0 84px;border:2px solid rgba(0,0,0,0.1);}
-.avatar img{width:100%;height:100%;object-fit:cover;}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:12px;}
 h1{margin:0;font-size:20px;}
 p.lead{margin:6px 0 0;opacity:0.9;}
-.grid{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px;}
-@media(max-width:880px){ .grid{grid-template-columns:1fr} .right{order:2} }
-.left{background:var(--card);padding:14px;border-radius:12px;}
-.slideshow{height:260px;border-radius:10px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;position:relative}
+.slideshow{height:260px;border-radius:10px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:20px;}
 .slideshow img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
-.right{background:var(--card);padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:12px;align-items:stretch;}
-.timeTogether{margin-top:10px;font-size:14px;text-align:center;opacity:0.8;}
-button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;padding:10px 14px;border-radius:10px;color:#02101a;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(255,107,129,0.12);}
-
-/* REBUS */
-.rebus-container{margin-top:20px; width:100%; text-align:center;}
+.timeTogether{margin-top:10px;font-size:14px;text-align:center;opacity:0.8;margin-bottom:20px;}
+button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;padding:10px 14px;border-radius:10px;color:#02101a;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(255,107,129,0.12);margin-top:10px;}
+.rebus-container{text-align:center;margin-bottom:20px;}
 .rebus-table{margin:0 auto;border-collapse:collapse;}
 .rebus-table td{padding:2px;}
 .rebus-table input{width:30px;height:30px;text-align:center;font-weight:bold;text-transform:uppercase;border:1px solid #ccc;font-size:16px;}
@@ -44,9 +38,12 @@ button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;pad
   50% { transform: translateY(50vh) translateX(20px) rotate(180deg); }
   100% { transform: translateY(110vh) translateX(-10px) rotate(360deg); opacity:0; }
 }
+.definitions{max-width:900px;margin-top:10px;}
+.definitions p{margin:4px 0;}
 </style>
 </head>
 <body>
+
 <div class="wrap">
   <header>
     <div class="avatar">
@@ -58,23 +55,32 @@ button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;pad
     </div>
   </header>
 
-  <div class="grid">
-    <div class="left">
-      <div class="slideshow">
-        <img id="slideshow" alt="slideshow">
-      </div>
-      
-      <div class="rebus-container">
-        <table class="rebus-table" id="rebusTable"></table>
-      </div>
-    </div>
-
-    <div class="right">
-      <div class="timeTogether" id="timeTogether"></div>
-      <button class="btn" id="unlockBtn">Deblochează mesajul</button>
-      <div class="messages" id="messageBox" style="margin-top:10px;text-align:center;"></div>
-    </div>
+  <div class="slideshow">
+    <img id="slideshow" alt="slideshow">
   </div>
+
+  <div class="timeTogether" id="timeTogether"></div>
+
+  <div class="rebus-container">
+    <table class="rebus-table" id="rebusTable"></table>
+  </div>
+
+  <button class="btn" id="unlockBtn">Deblochează mesajul</button>
+  <div class="messages" id="messageBox" style="margin-top:10px;text-align:center;"></div>
+</div>
+
+<div class="definitions" id="definitions">
+  <p>1. Sevgili olduğumuz ay</p>
+  <p>2. Sen böyle olunca içimdeki çocuk çok mutlu oluyor</p>
+  <p>3. Sürekli ettiğimiz ama nefret ettiğimiz</p>
+  <p>4. Konuştuğumuz 9. günde sana _____ olduğumu anladım</p>
+  <p>5. Sen benim____</p>
+  <p>6. Sen çok____</p>
+  <p>7. Sen bana böyle dediğinde çocuk gibi mutlu oluyorum</p>
+  <p>8. 2 kelime, 1 cümle, 2 “s”</p>
+  <p>9. İlk buluştuğumuz ay</p>
+  <p>10. İlişkimiz daha zor çünkü biz ____</p>
+  <p>11. Ben ya da sen diye bir şey yok. ____ var.</p>
 </div>
 
 <script>
@@ -115,22 +121,22 @@ button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;pad
 
   // ===== REBUS =====
   const words = [
-    {word:"MART", clue:"Sevgili olduğumuz ay", dir:"H"},
-    {word:"ANLAYIŞLI", clue:"Sen böyle olunca içimdeki çocuk çok mutlu oluyor", dir:"H"},
-    {word:"KAVGA", clue:"Sürekli ettiğimiz ama nefret ettiğimiz", dir:"H"},
-    {word:"AŞIK", clue:"Konuştuğumuz 9. günde sana _____ olduğumu anladım", dir:"H"},
-    {word:"MUTLULUĞUMSUN", clue:"Sen benim____", dir:"H"},
-    {word:"AKILLISIN", clue:"Sen çok____", dir:"H"},
-    {word:"BİTO", clue:"Sen bana böyle dediğinde çocuk gibi mutlu oluyorum", dir:"H"},
-    {word:"SENİ SEVİYORUM", clue:"2 kelime, 1 cümle, 2 “s”", dir:"H"},
-    {word:"NİSAN", clue:"İlk buluştuğumuz ay", dir:"H"},
-    {word:"UZAKTAYIZ", clue:"İlişkimiz daha zor çünkü biz ____", dir:"H"},
-    {word:"BİZ", clue:"Ben ya da sen diye bir şey yok. ____ var.", dir:"H"},
-    {word:"AŞKIMIZSONSUZ", clue:"Mesajul special", dir:"V"}
+    {word:"MART", clue:1, dir:"H"},
+    {word:"ANLAYIŞLI", clue:2, dir:"H"},
+    {word:"KAVGA", clue:3, dir:"H"},
+    {word:"AŞIK", clue:4, dir:"H"},
+    {word:"MUTLULUĞUMSUN", clue:5, dir:"H"},
+    {word:"AKILLISIN", clue:6, dir:"H"},
+    {word:"BİTO", clue:7, dir:"H"},
+    {word:"SENİ SEVİYORUM", clue:8, dir:"H"},
+    {word:"NİSAN", clue:9, dir:"H"},
+    {word:"UZAKTAYIZ", clue:10, dir:"H"},
+    {word:"BİZ", clue:11, dir:"H"},
+    {word:"AŞKIMIZSONSUZ", clue:12, dir:"V"}
   ];
 
-  const rows=15, cols=15;
-  const rebusTable=document.getElementById("rebusTable");
+  const rows = 15, cols = 15;
+  const rebusTable = document.getElementById("rebusTable");
 
   // create empty table
   for(let r=0;r<rows;r++){
@@ -145,21 +151,27 @@ button.btn{background:linear-gradient(90deg,var(--accent), #ff9aa2);border:0;pad
     rebusTable.appendChild(tr);
   }
 
-  // place vertical word in middle column
-  const midCol=Math.floor(cols/2);
+  // vertical word
   const verticalWord = words.find(w=>w.dir==="V").word;
+  const midCol = Math.floor(cols/2);
   const startRow = Math.floor((rows - verticalWord.length)/2);
   for(let i=0;i<verticalWord.length;i++){
     rebusTable.rows[startRow+i].cells[midCol].dataset.letter=verticalWord[i];
   }
 
-  // place horizontal words randomly (simplified: first row empty, just as demo)
+  // horizontal words - simplified: random rows, starting at random col (not overlapping vertical for simplicity)
   let hWords = words.filter(w=>w.dir==="H");
   hWords.forEach(w=>{
-    let row = Math.floor(Math.random()*rows);
-    let col = Math.floor(Math.random()*(cols - w.word.length));
-    for(let i=0;i<w.word.length;i++){
-      rebusTable.rows[row].cells[col+i].dataset.letter=w.word[i];
+    let placed=false;
+    while(!placed){
+      let row=Math.floor(Math.random()*rows);
+      let col=Math.floor(Math.random()*(cols - w.word.length));
+      if(col<=midCol-1 || col>=midCol+1){ // don't overwrite vertical
+        for(let i=0;i<w.word.length;i++){
+          rebusTable.rows[row].cells[col+i].dataset.letter=w.word[i];
+        }
+        placed=true;
+      }
     }
   });
 
